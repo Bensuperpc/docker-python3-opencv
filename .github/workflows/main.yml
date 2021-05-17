@@ -1,0 +1,38 @@
+name: docker-python3-opencv
+
+on:
+  push:
+    branches:
+    - 'main'
+    - 'master'
+    - 'dev'
+    paths-ignore:
+      - '**/README.md'
+  pull_request:
+    branches:
+    - '*'
+  schedule:
+    - cron: '0 7 18 * *'  # At 07:00 on day-of-month 18 https://crontab.guru/#0_7_*_*_1
+
+jobs:
+  image:
+    name: ${{ matrix.type }} ${{ matrix.version }}
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ["4.5.2", "4.4.0", "4.3.0", "4.2.0", "4.1.2", "4.0.1"]
+        type: ["opencv", "opencv_contrib"]
+    steps:
+      - name: "📥 Checkout Code"
+        uses: actions/checkout@v2.2.0
+        with:
+          submodules: 'recursive'
+          fetch-depth: 0
+      - name: "🛠️ Build"
+        run: docker build -t bensuperpc/docker-python3-opencv:${{ matrix.type }}-${{ matrix.version }} -f ${{ matrix.type }}/Dockerfile  . --build-arg OPENCV_VERSION=${{ matrix.version }}
+      - name: "📤 Upload to hub.docker.com"
+        if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
+        run: |
+            docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
+            docker image push bensuperpc/docker-python3-opencv --all-tags
