@@ -16,13 +16,15 @@ on:
 
 jobs:
   image:
-    name: ${{ matrix.type }} ${{ matrix.version }}
+    name: ${{ matrix.type.name }} ${{ matrix.version }}
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
         version: ["4.5.2", "4.4.0", "4.3.0", "4.2.0", "4.1.2", "4.0.1", "3.4.14"]
-        type: ["opencv", "opencv_contrib"]
+        type: 
+        - { name: "opencv", folder: "opencv", preffix: "", suffix: ""}
+        - { name: "opencv_contrib", folder: "opencv_contrib", preffix: "", suffix: "-contrib"}
     steps:
       - name: "📥 Checkout Code"
         uses: actions/checkout@v2.2.0
@@ -30,9 +32,9 @@ jobs:
           submodules: 'recursive'
           fetch-depth: 0
       - name: "🛠️ Build"
-        run: docker build -t bensuperpc/docker-python3-opencv:${{ matrix.type }}-${{ matrix.version }} -f ${{ matrix.type }}/Dockerfile  . --build-arg OPENCV_VERSION=${{ matrix.version }} --build-arg DOCKER_IMAGE=python:3.9 --build-arg BUILD_DATE=$(date +%Y-%m-%d_%H:%M:%S)
+        run: docker build -t bensuperpc/python3-opencv:${{ matrix.type.preffix }}${{ matrix.version }}${{ matrix.type.suffix }} -f ${{ matrix.type.folder }}/Dockerfile  . --build-arg OPENCV_VERSION=${{ matrix.version }} --build-arg DOCKER_IMAGE=python:3.9 --build-arg BUILD_DATE=$(date +%Y-%m-%d_%H:%M:%S)
       - name: "📤 Upload to hub.docker.com"
         if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
         run: |
             docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
-            docker image push bensuperpc/docker-python3-opencv --all-tags
+            docker image push bensuperpc/python3-opencv --all-tags
