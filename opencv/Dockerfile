@@ -28,7 +28,9 @@ RUN apt-get -qq update \
         libavformat-dev \
         libpq-dev \
     && pip install numpy \
-    && git clone https://github.com/opencv/opencv.git && git -C opencv checkout ${OPENCV_VERSION} \
+    && wget -q https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip -O opencv.zip \
+    && unzip -qq opencv.zip -d /opt \
+    && rm -rf opencv.zip \
     && cmake \
         -G Ninja \
         -D BUILD_TIFF=ON \
