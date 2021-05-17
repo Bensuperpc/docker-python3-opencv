@@ -3,6 +3,7 @@ FROM $DOCKER_IMAGE
 
 LABEL author="Josip Janzic <josip@jjanzic.com>"
 LABEL mantainer="Bensuperpc <bensuperpc@gmail.com>"
+LABEL version="1.0.0"
 
 WORKDIR /opt/build
 

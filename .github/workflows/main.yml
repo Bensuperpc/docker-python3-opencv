@@ -30,7 +30,7 @@ jobs:
           submodules: 'recursive'
           fetch-depth: 0
       - name: "🛠️ Build"
-        run: docker build -t bensuperpc/docker-python3-opencv:${{ matrix.type }}-${{ matrix.version }} -f ${{ matrix.type }}/Dockerfile  . --build-arg OPENCV_VERSION=${{ matrix.version }}
+        run: docker build -t bensuperpc/docker-python3-opencv:${{ matrix.type }}-${{ matrix.version }} -f ${{ matrix.type }}/Dockerfile  . --build-arg OPENCV_VERSION=${{ matrix.version }} #--build-arg DOCKER_IMAGE=python:3.9
       - name: "📤 Upload to hub.docker.com"
         if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
         run: |
