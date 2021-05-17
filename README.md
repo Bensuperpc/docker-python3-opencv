@@ -1,10 +1,10 @@
-[![Docker Automated buil](https://img.shields.io/docker/automated/jjanzic/docker-python3-opencv.svg)]()
+[![Docker Automated buil](https://img.shields.io/docker/automated/bensuperpc/docker-python3-opencv.svg)]()
 
-Docker image with python 3.7 and opencv 4.1.0
+Docker image with python 3.9 and opencv 4.5.2
 
 Usage:
 
-    docker run -it jjanzic/docker-python3-opencv python
+    docker run -it bensuperpc/docker-python3-opencv python
     >>> import cv2
 
 Image tagged with `:contrib` contains docker image built with [contrib modules](https://github.com/opencv/opencv_contrib/)
