@@ -1,13 +1,27 @@
-FROM python:3.9
+ARG DOCKER_IMAGE=python:3.9
+FROM $DOCKER_IMAGE
 
 LABEL author="Josip Janzic <josip@jjanzic.com>"
 LABEL mantainer="Bensuperpc <bensuperpc@gmail.com>"
-LABEL version="1.0.0"
 
 WORKDIR /opt/build
 
 ARG OPENCV_VERSION="4.5.2"
 ENV OPENCV_VERSION=$OPENCV_VERSION
+ARG BUILD_DATE
+ARG VCS_REF
+ARG BUILD_VERSION="1.0.0"
+
+LABEL org.label-schema.schema-version="1.0"
+LABEL org.label-schema.build-date=$BUILD_DATE
+LABEL org.label-schema.name="bensuperpc/docker-python3-opencv"
+LABEL org.label-schema.description="OpenCV with python3 in docker"
+LABEL org.label-schema.version=$BUILD_VERSION
+LABEL org.label-schema.vendor="Bensuperpc"
+LABEL org.label-schema.url="http://bensuperpc.com/"
+LABEL org.label-schema.vcs-url="https://github.com/Bensuperpc/docker-python3-opencv"
+LABEL org.label-schema.vcs-ref=$VCS_REF
+LABEL org.label-schema.docker.cmd="docker build -t opencv -f opencv_contrib/Dockerfile . --build-arg OPENCV_VERSION=4.5.2"
 
 RUN apt-get -qq update \
     && apt-get -qq install -y --no-install-recommends \
