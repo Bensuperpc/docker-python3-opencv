@@ -32,6 +32,8 @@ jobs:
         with:
           submodules: 'recursive'
           fetch-depth: 0
+      - name: "Docker QEMU"
+        run: make qemu_x86
       - name: "🛠️ Build"
         run: docker buildx build -t bensuperpc/python3-opencv:${{ matrix.arch_name }}-${{ matrix.type.preffix }}${{ matrix.version }}${{ matrix.type.suffix }} -t bensuperpc/python3-opencv:${{ matrix.arch_name }}-${{ matrix.type.preffix }}${{ matrix.version }}${{ matrix.type.suffix }}-$(date '+%Y%m%d')-$(git rev-parse --short HEAD) -f ${{ matrix.type.folder }}/Dockerfile  . --build-arg OPENCV_VERSION=${{ matrix.version }} --build-arg DOCKER_IMAGE=python:3.9 --build-arg BUILD_DATE=$(date +%Y-%m-%d_%H:%M:%S) --platform linux/${{ matrix.arch_name }}
       - name: "📤 Upload to hub.docker.com"
