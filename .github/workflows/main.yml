@@ -16,7 +16,7 @@ on:
 
 jobs:
   image:
-    name: python3-opencv:${{ matrix.type.preffix }}${{ matrix.version }}${{ matrix.type.suffix }}
+    name: python3-opencv:${{ matrix.arch_name }}-${{ matrix.type.preffix }}${{ matrix.version }}${{ matrix.type.suffix }}
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
