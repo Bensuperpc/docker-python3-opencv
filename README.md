@@ -12,17 +12,17 @@ Image tagged with `:contrib` contains docker image built with [contrib modules](
 
 List of available docker tags:
 
-- `4.5.2` (`latest` branch)
-- `4.5.2-contrib`
-- `4.4.0`
-- `4.4.0-contrib`
-- `4.3.0`
-- `4.3.0-contrib`
-- `4.2.0`
-- `4.2.0-contrib`
-- `4.1.2`
-- `4.1.2-contrib`
-- `4.0.0`
-- `4.0.0-contrib`
-- `3.4.14`
-- `3.4.14-contrib`
+- `amd64-4.5.2` (`latest` branch)
+- `amd64-4.5.2-contrib`
+- `amd64-4.4.0`
+- `amd64-4.4.0-contrib`
+- `amd64-4.3.0`
+- `amd64-4.3.0-contrib`
+- `amd64-4.2.0`
+- `amd64-4.2.0-contrib`
+- `amd64-4.1.2`
+- `amd64-4.1.2-contrib`
+- `amd64-4.0.0`
+- `amd64-4.0.0-contrib`
+- `amd64-3.4.14`
+- `amd64-3.4.14-contrib`
