@@ -58,7 +58,7 @@ RUN apt-get -qq update \
         -D WITH_CUDA=OFF \
         -D WITH_OPENGL=ON \
         -D WITH_OPENCL=ON \
-        -D WITH_IPP=ON \
+        -D WITH_IPP=OFF \
         -D WITH_TBB=ON \
         -D WITH_EIGEN=ON \
         -D WITH_V4L=ON \
